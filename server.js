@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
@@ -10,6 +8,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST_ADDRESS = process.env.HOST_ADDRESS;
+const LOCAL_ADDRESS  = process.env.LOCAL_ADDRESS;
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(helmet({
         directives: {
             defaultSrc: ["'self'"],
             scriptSrc: ["'self'"],
-            connectSrc: ["'self'", "http://localhost:3000"], // 클라이언트에서 API 호출 허용
+            connectSrc: ["'self'", `http://${HOST_ADDRESS}:${PORT}`], // 클라이언트에서 API 호출 허용
         },
     },
 }));
